@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Koordinasi Tim Akunting - Kredit Pensiun Channeling</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #8b5cf6;
+            --accent: #ec4899;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --border: #e2e8f0;
+            --text: #334155;
+            --text-light: #64748b;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 15s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-10%, -10%) scale(1.1); }
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav {
+            background: var(--dark);
+            padding: 1rem 2rem;
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-btn {
+            padding: 0.75rem 1.5rem;
+            background: transparent;
+            color: white;
+            border: 2px solid transparent;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--primary);
+        }
+
+        .nav-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+        }
+
+        .content {
+            padding: 3rem 2rem;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 3px solid var(--primary);
+            display: inline-block;
+        }
+
+        h3 {
+            color: var(--secondary);
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        h4 {
+            color: var(--dark);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .card {
+            background: var(--light);
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateX(8px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .card.warning {
+            border-left-color: var(--warning);
+            background: #fffbeb;
+        }
+
+        .card.success {
+            border-left-color: var(--success);
+            background: #f0fdf4;
+        }
+
+        .card.danger {
+            border-left-color: var(--danger);
+            background: #fef2f2;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        th {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        tr:hover {
+            background: var(--light);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .checklist {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .checklist li {
+            padding: 1rem;
+            margin: 0.5rem 0;
+            background: white;
+            border-radius: 12px;
+            border: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .checklist li:hover {
+            border-color: var(--primary);
+            transform: translateX(8px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+        }
+
+        .checklist li::before {
+            content: '□';
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin: 0.25rem;
+        }
+
+        .badge.primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .badge.success {
+            background: var(--success);
+            color: white;
+        }
+
+        .badge.warning {
+            background: var(--warning);
+            color: white;
+        }
+
+        .badge.danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .grid-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 2px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .grid-item:hover {
+            border-color: var(--primary);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.2);
+            transform: translateY(-4px);
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+            margin: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+        }
+
+        .timeline-item {
+            position: relative;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            background: white;
+            border-radius: 12px;
+            border: 2px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover {
+            border-color: var(--primary);
+            transform: translateX(8px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.5rem;
+            top: 2rem;
+            width: 1rem;
+            height: 1rem;
+            background: var(--primary);
+            border: 3px solid white;
+            border-radius: 50%;
+            box-shadow: 0 0 0 3px var(--primary);
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #fef3c7 0%, #fde68a 100%);
+            padding: 0.25rem 0.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        .code-block {
+            background: var(--dark);
+            color: #10b981;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .print-btn {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 1rem 2rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(236, 72, 153, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .print-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(236, 72, 153, 0.5);
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+            }
+            .nav, .print-btn {
+                display: none;
+            }
+            .section {
+                display: block !important;
+                page-break-after: always;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.75rem;
+            }
+            .nav {
+                flex-wrap: nowrap;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            table {
+                font-size: 0.875rem;
+            }
+            th, td {
+                padding: 0.75rem;
+            }
+        }
+
+        .icon {
+            display: inline-block;
+            width: 1.5rem;
+            height: 1.5rem;
+            margin-right: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Koordinasi Tim Akunting</h1>
+            <p>Kredit Pensiun Channeling - Framework & Implementation Guide</p>
+        </div>
+
+        <div class="nav">
+            <button class="nav-btn active" onclick="showSection(0)">Executive Summary</button>
+            <button class="nav-btn" onclick="showSection(1)">Scope Pekerjaan</button>
+            <button class="nav-btn" onclick="showSection(2)">Risiko Akuntansi</button>
+            <button class="nav-btn" onclick="showSection(3)">Deliverables</button>
+            <button class="nav-btn" onclick="showSection(4)">Agenda Meeting</button>
+            <button class="nav-btn" onclick="showSection(5)">Pertanyaan Kunci</button>
+            <button class="nav-btn" onclick="showSection(6)">Success Criteria</button>
+        </div>
+
+        <div class="content">
+            <!-- Section 1: Executive Summary -->
+            <div class="section active">
+                <h2>A. Executive Summary untuk Tim Akunting</h2>
+
+                <h3>Latar Belakang Bisnis</h3>
+                <div class="card">
+                    <p><strong>Skema Bisnis:</strong> Channeling untuk refinancing debitur pensiunan (populasi pilot: debitur dengan gaji sudah keluar)</p>
+                    <p><strong>Keterbatasan:</strong> Core Banking System tidak dapat diupdate untuk pencatatan otomatis terpisah</p>
+                    <p><strong>Solusi:</strong> Pembedaan melalui <span class="highlight">Product Naming → COA Product → Kode RB </span></p>
+                    <p><strong>⚠️ Implikasi:</strong> Proses manual yang menambah beban kerja tim Akunting</p>
+                </div>
+
+                <h3>Tujuan Koordinasi</h3>
+                <div class="card success">
+                    <p>Menyusun kerangka akuntansi yang komprehensif sebelum implementasi, sehingga performa bisnis Channeling dapat direview secara akurat dan terukur.</p>
+                </div>
+
+                <h3>Konsekuensi Keuangan yang Perlu Dikelola</h3>
+                <div class="grid">
+                    <div class="grid-item">
+                        <h4>1️⃣ Lost Interest Income</h4>
+                        <p>Loan eksisting akan dilunasi, sehingga ada pendapatan bunga yang hilang</p>
+                    </div>
+                    <div class="grid-item">
+                        <h4>2️⃣ Direct Cost</h4>
+                        <p>Direct cost akan muncul di awal proses implementasi</p>
+                    </div>
+                    <div class="grid-item">
+                        <h4>3️⃣ Penalty & Refund</h4>
+                        <p>Pendapatan pinalti serta pengembalian premi asuransi sebagai kompensasi pelunasan dipercepat</p>
+                    </div>
+                    <div class="grid-item">
+                        <h4>4️⃣ Fee Mitra</h4>
+                        <p>Margin dari selisih bunga (misal: BWS 8% vs Mitra 10% = 2% fee). Secara akuntansi menjadi beban debitur, perlu dicermati dalam perhitungan pendapatan bersih bank</p>
+                    </div>
+                    <div class="grid-item">
+                        <h4>5️⃣ CKPN</h4>
+                        <p>Pembentukan CKPN tetap wajib dilakukan meskipun ada klausul buyback. Buyback tidak menghilangkan kewajiban pembentukan CKPN sesuai PSAK dan regulasi</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Scope Pekerjaan -->
+            <div class="section">
+                <h2>B. Scope Pekerjaan Tim Akunting</h2>
+
+                <h3>1. Penyusunan Framework Akuntansi</h3>
+
+                <h4>a) Struktur COA dan Product Mapping</h4>
+                <div class="card">
+                    <ul class="checklist">
+                        <li>Inventarisasi COA yang akan digunakan untuk transaksi Channeling</li>
+                        <li>Definisi daftar produk channeling yang menjadi turunan dari COA tersebut</li>
+                        <li>Mapping kode RB untuk setiap produk channeling</li>
+                        <li>Dokumentasi hierarki: COA → Product Code → RB Code</li>
+                    </ul>
+                </div>
+
+                <h4>b) Treatment Akuntansi untuk Komponen Keuangan Khusus</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Komponen</th>
+                            <th>Deskripsi</th>
+                            <th>Pertanyaan untuk Tim Akunting</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Lost Interest Income</strong></td>
+                            <td>Pendapatan bunga loan eksisting yang hilang akibat pelunasan dipercepat</td>
+                            <td>Bagaimana mencatat opportunity cost ini? Apakah perlu disclosed sebagai catatan tersendiri?</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Direct Cost di Awal</strong></td>
+                            <td>Biaya operasional implementasi channeling</td>
+                            <td>COA mana yang tepat? Apakah di-capitalize atau langsung expense?</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Penalty Income</strong></td>
+                            <td>Pendapatan dari pinalti pelunasan dipercepat</td>
+                            <td>Treatment sebagai other income atau pengurang kerugian lost interest?</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Refund Premi Asuransi</strong></td>
+                            <td>Pengembalian premi dari pelunasan dipercepat</td>
+                            <td>Pencatatan sebagai receivable atau pengurang beban? Timeline pengakuan?</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Fee Mitra (Margin Spread)</strong></td>
+                            <td>Selisih bunga (misal: BWS 8% vs Mitra 10% = 2% fee)</td>
+                            <td>Dicatat sebagai beban atau pengurang pendapatan bunga? Akrual atau cash basis?</td>
+                        </tr>
+                        <tr>
+                            <td><strong>CKPN Channeling</strong></td>
+                            <td>Pembentukan cadangan meski ada klausul buyback</td>
+                            <td>Perhitungan menggunakan PSAK berapa? Apakah perlu segmentasi khusus mengingat ada buyback?</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>c) Konsep Pencatatan Transisi (Migration)</h4>
+                <div class="card warning">
+                    <p>Saat loan eksisting beralih ke channeling, diperlukan jurnal entry template untuk:</p>
+                    <div class="code-block">
+Entry yang dibutuhkan:
+- Pelunasan loan eksisting (Dr/Cr?)
+- Pencatatan loan baru channeling (Dr/Cr?)
+- Pengakuan penalty dan refund premi (Dr/Cr?)
+- Akrual fee mitra (Dr/Cr?)
+                    </div>
+                    <p><strong>Tim Akunting diminta menyusun jurnal entry template untuk berbagai skenario.</strong></p>
+                </div>
+
+                <h3>2. Desain Laporan dan Dashboard</h3>
+
+                <h4>a) Format Laporan Khusus Channeling</h4>
+                <div class="card">
+                    <p><strong>P&L Statement Channeling</strong> (terpisah dari portfolio reguler):</p>
+                    <div class="code-block">
+- Interest Income Channeling
+  (-) Fee Mitra
+  (-) Direct Cost
+  (+) Penalty Income
+  (+) Refund Premi
+  (-) CKPN Expense
+  = Net Income Channeling
+                    </div>
+                    <p><strong>Comparative Analysis:</strong></p>
+                    <ul>
+                        <li>Lost Income from Old Portfolio vs New Income from Channeling</li>
+                        <li>Break-even analysis</li>
+                    </ul>
+                </div>
+
+                <h4>b) KPI Akuntansi yang Perlu Dimonitor</h4>
+                <div class="grid">
+                    <div class="grid-item">
+                        <span class="badge primary">NIM</span>
+                        <p>Net Interest Margin Channeling vs Portfolio Reguler</p>
+                    </div>
+                    <div class="grid-item">
+                        <span class="badge success">CIR</span>
+                        <p>Cost-to-Income Ratio khusus Channeling</p>
+                    </div>
+                    <div class="grid-item">
+                        <span class="badge warning">NPL</span>
+                        <p>NPL Ratio Channeling (meski ada buyback)</p>
+                    </div>
+                    <div class="grid-item">
+                        <span class="badge danger">CKPN</span>
+                        <p>CKPN Coverage Ratio</p>
+                    </div>
+                    <div class="grid-item">
+                        <span class="badge primary">ROA</span>
+                        <p>ROA Channeling</p>
+                    </div>
+                </div>
+
+                <h4>c) Frekuensi Pelaporan</h4>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h4>📅 Harian</h4>
+                        <p>Monitoring volume dan nilai transaksi</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>📊 Mingguan</h4>
+                        <p>P&L update dan aging analysis</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>📈 Bulanan</h4>
+                        <p>Full financial report dan variance analysis</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>📑 Quarterly</h4>
+                        <p>Strategic review untuk steering committee</p>
+                    </div>
+                </div>
+
+                <h3>3. Proses Manual dan SOP</h3>
+
+                <h4>a) Menyusun SOP Pencatatan Manual</h4>
+                <ul class="checklist">
+                    <li>Checklist harian untuk ekstraksi data dari CBS</li>
+                    <li>Prosedur mapping ke RB code</li>
+                    <li>Validasi dan rekonsiliasi</li>
+                    <li>Sign-off dan approval matrix</li>
+                </ul>
+
+                <h4>b) Worksheet/Template Excel untuk:</h4>
+                <ul class="checklist">
+                    <li>Tracking transaksi channeling</li>
+                    <li>Perhitungan akrual fee mitra</li>
+                    <li>Monitoring CKPN</li>
+                    <li>Rekonsiliasi dengan GL</li>
+                </ul>
+
+                <h4>c) Kontrol Internal</h4>
+                <ul class="checklist">
+                    <li>Maker-checker untuk setiap pencatatan manual</li>
+                    <li>Periodic review oleh supervisor</li>
+                    <li>Monthly reconciliation dengan unit bisnis</li>
+                </ul>
+            </div>
+
+            <!-- Section 3: Risiko Akuntansi -->
+            <div class="section">
+                <h2>C. Aspek Risiko Akuntansi yang Perlu Dimitigasi</h2>
+
+                <h3>1. Risiko Compliance dan Regulasi</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Risiko</th>
+                            <th>Dampak</th>
+                            <th>Mitigasi yang Diperlukan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Pelanggaran PSAK 71/73</strong></td>
+                            <td>Pencatatan CKPN tidak sesuai standar</td>
+                            <td>Konsultasi dengan eksternal auditor sejak tahap desain</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pelaporan OJK/BI Tidak Akurat</strong></td>
+                            <td>Sanksi regulasi</td>
+                            <td>Mapping channeling ke format LBU/LBUS sejak awal</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Transfer Pricing Issue</strong></td>
+                            <td>Fee mitra tidak wajar menurut tax authority</td>
+                            <td>Dokumentasi arm's length principle untuk fee structure</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>2. Risiko Operasional</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Risiko</th>
+                            <th>Dampak</th>
+                            <th>Mitigasi yang Diperlukan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Human Error dalam Pencatatan Manual</strong></td>
+                            <td>Laporan keuangan salah saji</td>
+                            <td>Dual control, automated validation rules di Excel</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ketergantungan pada Key Person</strong></td>
+                            <td>Business continuity issue</td>
+                            <td>SOP tertulis, backup personnel training</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Bottleneck di Akhir Bulan</strong></td>
+                            <td>Closing tertunda</td>
+                            <td>Proses akrual harian, bukan monthly batch</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>3. Risiko Finansial</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Risiko</th>
+                            <th>Dampak</th>
+                            <th>Mitigasi yang Diperlukan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Buyback Tidak Ter-exercise</strong></td>
+                            <td>CKPN melonjak</td>
+                            <td>Stress testing, worst-case scenario modeling</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Fee Mitra Menggerus Margin</strong></td>
+                            <td>Channeling rugi</td>
+                            <td>Profitability threshold monitoring, dynamic pricing review</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Timing Mismatch Arus Kas</strong></td>
+                            <td>Likuiditas terganggu</td>
+                            <td>Cash flow projection, contingency fund</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>4. Risiko Reputasi dan Audit</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Risiko</th>
+                            <th>Dampak</th>
+                            <th>Mitigasi yang Diperlukan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Audit Finding atas Proses Manual</strong></td>
+                            <td>Qualified opinion</td>
+                            <td>Pre-audit review dengan internal audit</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Disclosure Tidak Memadai</strong></td>
+                            <td>Stakeholder concern</td>
+                            <td>Template disclosure notes sejak awal</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+<!-- Section 4: Deliverables -->
+<div class="section">
+    <h2>D. Deliverables yang Diharapkan dari Tim Akunting</h2>
+
+    <h3>Fase 1: Concept Design (Sebelum Implementasi)</h3>
+    
+    <h4>A. Policy & Framework</h4>
+    <ul class="checklist">
+        <li><strong>Memo Kebijakan Akuntansi Channeling</strong>
+            <br><span style="color: var(--text-light); font-size: 0.9rem;">Dokumen formal yang menjelaskan prinsip pengakuan pendapatan dan biaya, treatment sesuai PSAK, serta penentuan bank sebagai principal/agent</span>
+        </li>
+        <li><strong>Revenue Recognition Policy</strong>
+            <br><span style="color: var(--text-light); font-size: 0.9rem;">Policy khusus untuk fee channeling: pengakuan gross/net, revenue sharing dengan partner, cut-off policy, dan treatment refund/cancellation</span>
+        </li>
+        <li><strong>Tax Treatment Analysis</strong>
+            <br><span style="color: var(--text-light); font-size: 0.9rem;">Analisis PPh 23, PPN (jika applicable), withholding tax untuk partner, dan memo tax planning channeling business</span>
+        </li>
+    </ul>
+
+    <h4>B. Technical Setup</h4>
+    <ul class="checklist">
+        <li><strong>Struktur COA dan Product Code Mapping</strong>
+            <br><span style="color: var(--text-light); font-size: 0.9rem;">Daftar kode akun baru spesifik channeling, mapping product code ke GL account, dan tabel relasi CBS code dengan accounting code</span>
+        </li>
+        <li><strong>Template Jurnal Entry untuk Berbagai Skenario</strong>
+            <br><span style="color: var(--text-light); font-size: 0.9rem;">Template standar untuk: pencairan kredit, pembayaran fee, biaya komisi, pelunasan dipercepat, dan exceptional cases</span>
+        </li>
+        <li><strong>Inter-company/Partner Reconciliation Framework</strong>
+            <br><span style="color: var(--text-light); font-size: 0.9rem;">Template rekonsiliasi dengan partner, frequency (daily/weekly/monthly), escalation matrix untuk dispute, dan format konfirmasi saldo</span>
+        </li>
+    </ul>
+
+    <h4>C. Documentation</h4>
+    <ul class="checklist">
+        <li><strong>Draft SOP Pencatatan Manual</strong>
+            <br><span style="color: var(--text-light); font-size: 0.9rem;">Prosedur langkah-demi-langkah, flow chart dari CBS ke GL, checklist validasi, dan format dokumentasi pendukung</span>
+        </li>
+        <li><strong>Format Laporan P&L Channeling</strong>
+            <br><span style="color: var(--text-light); font-size: 0.9rem;">Template laba rugi khusus channeling, pemisahan per partner/product, KPI metrics, dan format komparasi budget vs actual</span>
+        </li>
+    </ul>
+
+    <h3>Fase 2: Implementation Support</h3>
+    <ul class="checklist">
+        <li><strong>Training untuk Tim Operasional</strong>
+            <br><span style="color: var(--text-light); font-size: 0.9rem;">Modul pelatihan (slide deck + handbook), video tutorial, contoh kasus nyata, dan assessment pemahaman</span>
+        </li>
+        <li><strong>Integration Testing dengan CBS</strong>
+            <br><span style="color: var(--text-light); font-size: 0.9rem;">Test automatic posting CBS ke GL, validasi product code mapping, test scenario exceptional cases (rejection, reversal)</span>
+        </li>
+        <li><strong>Testing dan UAT untuk Proses Manual</strong>
+            <br><span style="color: var(--text-light); font-size: 0.9rem;">Dokumen test case, test result log (pass/fail), issue tracking list, dan sign-off form UAT</span>
+        </li>
+        <li><strong>Dry-run Laporan untuk 1 Periode Simulasi</strong>
+            <br><span style="color: var(--text-light); font-size: 0.9rem;">Laporan simulasi 1 bulan dengan data dummy, rekonsiliasi CBS vs accounting report, identifikasi gap/error</span>
+        </li>
+        <li><strong>Management Report Template</strong>
+            <br><span style="color: var(--text-light); font-size: 0.9rem;">Dashboard untuk manajemen (weekly/monthly), executive summary channeling performance, dan trend analysis report</span>
+        </li>
+        <li><strong>Sign-off Readiness dari Internal Audit</strong>
+            <br><span style="color: var(--text-light); font-size: 0.9rem;">Checklist audit readiness, dokumentasi control framework, evidence compliance, dan approval letter untuk go-live</span>
+        </li>
+    </ul>
+
+    <h3>Fase 3: Post-Implementation</h3>
+    <ul class="checklist">
+        <li><strong>Monthly Monitoring dan Variance Analysis</strong>
+            <br><span style="color: var(--text-light); font-size: 0.9rem;">Laporan bulanan: actual vs forecast, volume vs target, analisis selisih dengan root cause, dan dashboard metrics</span>
+        </li>
+        <li><strong>Quarterly Review untuk Perbaikan Proses</strong>
+            <br><span style="color: var(--text-light); font-size: 0.9rem;">Evaluasi efektivitas proses, identifikasi pain points dan usulan perbaikan, update SOP, dan benchmarking best practice</span>
+        </li>
+        <li><strong>Regulatory Reporting Compliance</strong>
+            <br><span style="color: var(--text-light); font-size: 0.9rem;">Template LBBU (jika ada line item khusus), dokumentasi untuk OJK, dan compliance checklist Basel/PSAK requirement</span>
+        </li>
+        <li><strong>Annual Audit Preparation Support</strong>
+            <br><span style="color: var(--text-light); font-size: 0.9rem;">Working paper untuk auditor eksternal, dokumentasi transaksi setahun, reconciliation year-end, dan response terhadap audit findings</span>
+        </li>
+        <li><strong>Process Automation Roadmap</strong>
+            <br><span style="color: var(--text-light); font-size: 0.9rem;">Identifikasi manual process yang bisa di-automate, cost-benefit analysis, dan timeline system enhancement</span>
+        </li>
+    </ul>
+
+    <div class="card success" style="margin-top: 2rem;">
+        <h3 style="margin-top: 0;">📋 Ringkasan Struktur Deliverables</h3>
+        <div class="code-block" style="background: white; color: var(--dark); border: 2px solid var(--success);">
+FASE 1: Concept Design
+├─ A. Policy & Framework
+│  ├─ Memo Kebijakan Akuntansi
+│  ├─ Revenue Recognition Policy
+│  └─ Tax Treatment Analysis
+│
+├─ B. Technical Setup
+│  ├─ Struktur COA dan Mapping
+│  ├─ Template Jurnal Entry
+│  └─ Inter-company Recon Framework
+│
+└─ C. Documentation
+   ├─ Draft SOP Pencatatan
+   └─ Format Laporan P&L
+
+FASE 2: Implementation Support
+├─ Training untuk Tim Operasional
+├─ Integration Testing dengan CBS
+├─ Testing dan UAT
+├─ Dry-run Laporan
+├─ Management Report Template
+└─ Sign-off Readiness Internal Audit
+
+FASE 3: Post-Implementation
+├─ Monthly Monitoring & Variance Analysis
+├─ Quarterly Review
+├─ Regulatory Reporting Compliance
+├─ Annual Audit Preparation Support
+└─ Process Automation Roadmap
+        </div>
+    </div>
+
+    <div class="card" style="margin-top: 1.5rem;">
+        <h3 style="margin-top: 0;">💡 Catatan Penting untuk Tim Akunting</h3>
+        <p><strong>Deliverables ini dirancang comprehensive untuk memastikan:</strong></p>
+        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+            <li>✅ Compliance dengan PSAK dan regulasi</li>
+            <li>✅ Akurasi pencatatan dan pelaporan</li>
+            <li>✅ Efisiensi proses manual</li>
+            <li>✅ Audit trail yang lengkap</li>
+            <li>✅ Sustainability jangka panjang</li>
+        </ul>
+    </div>
+</div>
+
+        <!-- Section 5: Agenda Meeting -->
+        <div class="section">
+            <h2>E. Agenda Meeting dengan Tim Akunting</h2>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h3>Meeting #1: Kickoff (2 jam)</h3>
+                    <ol>
+                        <li>Presentasi skema bisnis channeling (15 menit)</li>
+                        <li>Penjelasan keterbatasan sistem dan implikasi (10 menit)</li>
+                        <li>Diskusi komponen keuangan dan treatment yang diinginkan (45 menit)</li>
+                        <li>Identifikasi risiko dan concern dari tim Akunting (30 menit)</li>
+                        <li>Agreement timeline dan next steps (20 menit)</li>
+                    </ol>
+                </div>
+
+                <div class="timeline-item">
+                    <h3>Meeting #2: Deep Dive (3 jam)</h3>
+                    <ol>
+                        <li>Review draft COA structure (45 menit)</li>
+                        <li>Walkthrough jurnal entry untuk setiap transaksi (60 menit)</li>
+                        <li>Diskusi format laporan dan KPI (45 menit)</li>
+                        <li>Finalisasi SOP dan kontrol internal (30 menit)</li>
+                    </ol>
+                </div>
+
+                <div class="timeline-item">
+                    <h3>Meeting #3: Sign-off (1 jam)</h3>
+                    <ol>
+                        <li>Presentasi final framework</li>
+                        <li>UAT result review</li>
+                        <li>Go/No-go decision</li>
+                        <li>Post-implementation support plan</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 6: Pertanyaan Kunci -->
+        <div class="section">
+            <h2>F. Pertanyaan Kunci untuk Tim Akunting</h2>
+
+            <h3>Pertanyaan Strategis</h3>
+            <div class="card">
+                <ol>
+                    <li>Apakah framework ini feasible dengan kapasitas tim saat ini?</li>
+                    <li>Berapa lama lead time yang dibutuhkan untuk menyiapkan seluruh deliverable?</li>
+                    <li>Apakah ada kebutuhan tambahan resource (orang/sistem/tools)?</li>
+                    <li>Apa saja dependencies dengan unit lain (IT, Risk, Compliance)?</li>
+                </ol>
+            </div>
+
+            <h3>Pertanyaan Teknis</h3>
+            <div class="card warning">
+                <ol start="5">
+                    <li>Bagaimana treatment buyback dalam perhitungan CKPN menurut PSAK terbaru?</li>
+                    <li>Apakah fee mitra dicatat gross atau net terhadap interest income?</li>
+                    <li>Bagaimana amortisasi direct cost: straight-line atau sesuai tenor loan?</li>
+                    <li>Untuk refund premi, apakah ada timing difference yang perlu di-accrue?</li>
+                </ol>
+            </div>
+
+            <h3>Pertanyaan Risiko</h3>
+            <div class="card danger">
+                <ol start="9">
+                    <li>Apa saja red flag yang perlu dimonitor dari perspektif akuntansi?</li>
+                    <li>Bagaimana memastikan data channeling tidak "tercampur" dengan portfolio reguler dalam sistem yang tidak terpisah?</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Section 7: Success Criteria -->
+        <div class="section">
+            <h2>G. Success Criteria</h2>
+
+            <p>Koordinasi dengan tim Akunting dianggap berhasil jika:</p>
+
+            <div class="grid">
+                <div class="grid-item">
+                    <h3>✅ Clarity</h3>
+                    <p>Setiap komponen keuangan memiliki konsep pencatatan yang jelas dan sesuai PSAK</p>
+                </div>
+
+                <div class="grid-item">
+                    <h3>✅ Accuracy</h3>
+                    <p>Laporan dapat menyajikan performa Channeling secara akurat (profit/loss terukur)</p>
+                </div>
+
+                <div class="grid-item">
+                    <h3>✅ Compliance</h3>
+                    <p>Treatment akuntansi aman dari perspektif audit dan regulasi</p>
+                </div>
+
+                <div class="grid-item">
+                    <h3>✅ Efficiency</h3>
+                    <p>Proses manual tidak menjadi bottleneck operasional</p>
+                </div>
+
+                <div class="grid-item">
+                    <h3>✅ Traceability</h3>
+                    <p>Audit trail lengkap untuk setiap transaksi channeling</p>
+                </div>
+            </div>
+
+            <div class="card success" style="margin-top: 2rem;">
+                <h3 style="margin-top: 0;">💡 Catatan Penting</h3>
+                <p><strong>Dengan materi ini, kami berharap kolaborasi dengan tim Akunting dapat berjalan lebih maksimal dan memberikan kejelasan saat eksekusi seluruh proses yang berkaitan dengan pencatatan keuangan pada bisnis Channeling.</strong></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<button class="print-btn" onclick="window.print()">🖨️ Print / Save PDF</button>
+
+<script>
+    function showSection(index) {
+        const sections = document.querySelectorAll('.section');
+        const buttons = document.querySelectorAll('.nav-btn');
+        
+        sections.forEach((section, i) => {
+            section.classList.remove('active');
+            buttons[i].classList.remove('active');
+        });
+        
+        sections[index].classList.add('active');
+        buttons[index].classList.add('active');
+        
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+</script>
